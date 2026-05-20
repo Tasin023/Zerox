@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NexGen E-Commerce | Tech & Blockchain Store</title>
-     <style>
+    <style>
         /* CSS Reset & Core Variables */
         :root {
             --bg-dark: #0a0d14;
@@ -694,74 +694,74 @@
 </head>
 <body>
 
+    <!-- Navigation -->
     <nav>
-        <div class="logo">E<span>MON</span></div>
+        <div class="logo">NEX<span>GEN</span></div>
         <div class="nav-links">
             <a href="#">Home</a>
             <a href="#">Products</a>
-            <a href="#">About Info</a>
-            <a href="#">Network</a>
+            <a href="#">Blockchain</a>
+            <a href="#">About</a>
         </div>
-        
         <div class="nav-actions">
-            <button class="btn-primary">View Cart</button>
+            <button class="btn-primary">Connect</button>
             <div class="menu-container">
-                <div class="menu-dots" id="categoryMenuToggle" title="Categories Menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <div class="menu-dots" onclick="this.classList.toggle('active'); document.getElementById('dropMenu').classList.toggle('show')">
+                    <span></span><span></span><span></span>
                 </div>
-                <div class="dropdown-menu" id="categoryDropdown">
-                    <h4>Shop Categories</h4>
-                    <a href="#">Man</a>
-                    <a href="#">Woman</a>
-                    <a href="#">Kids</a>
-                    <a href="#">Wearables</a>
-                    <a href="#">Audio Nodes</a>
-                    <a href="#">Controllers</a>
-                    <a href="#">Core Hardware</a>
+                <div class="dropdown-menu" id="dropMenu">
+                    <h4>Quick Links</h4>
+                    <a href="#">🛒 Cart</a>
+                    <a href="#">❤️ Wishlist</a>
+                    <a href="#">📦 Orders</a>
+                    <a href="#">⚙️ Settings</a>
                 </div>
             </div>
         </div>
     </nav>
 
+    <!-- Search Banner -->
     <div class="search-banner">
         <div class="search-container">
-            <form action="#" method="GET" class="search-form">
-                <div style="position: relative; width: 100%;">
-                    <input type="text" placeholder="Search infrastructure nodes, hardware..." class="search-input" aria-label="Search items">
-                    <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                </div>
-            </form>
+            <div class="search-form">
+                <input class="search-input" type="text" placeholder="Search products, brands...">
+                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
         </div>
     </div>
 
-    <header class="hero">
+    <!-- Hero Section -->
+    <section class="hero">
         <div class="hero-content">
-            <h1>Hardware Layer For <span>Smart Commerce</span></h1>
-            <p>Access high-performance decentralized computing rigs, hardware security tools, and Web3 components straight from our validated storefront ecosystem.</p>
-            
-            <div>
-                <button class="btn-primary" style="margin-right: 15px; padding: 12px 28px; font-size: 16px;">Explore Storefront</button>
+            <h1>Next-Gen Tech<br>at Your <span>Fingertips</span></h1>
+            <p>Explore the latest in hardware, blockchain gadgets, and cutting-edge accessories — delivered fast.</p>
+            <button class="btn-primary">Shop Now →</button>
+            <div class="about-contact">
+                <h3>Contact Us</h3>
+                <div class="contact-buttons">
+                    <a href="#" class="contact-btn whatsapp">💬 WhatsApp</a>
+                    <a href="#" class="contact-btn messenger">💙 Messenger</a>
+                    <a href="#" class="contact-btn phone">📞 Call</a>
+                </div>
             </div>
         </div>
-
         <div class="hero-showcase">
             <div class="terminal-box">
-                <div class="slider-container" id="heroSlider">
-                    <img src="image1.png" alt="Hardware showcase 1" class="slider-image active">
-                    <img src="28304.jpg" alt="Hardware showcase 2" class="slider-image">
-                    <img src="image2.jpg" alt="Hardware showcase 3" class="slider-image">
-                    <img src="shoesoct7.jpg" alt="Hardware showcase 4" class="slider-image">
+                <div class="slider-container">
+                    <img class="slider-image active" src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=500&q=80" alt="Laptop">
+                    <img class="slider-image" src="https://images.unsplash.com/photo-1546054454-aa26e2b734c7?w=500&q=80" alt="Phone">
+                    <img class="slider-image" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80" alt="Headphones">
                 </div>
-                <div class="slider-dots" id="sliderDots"></div>
+                <div class="slider-dots">
+                    <div class="slider-dot active"></div>
+                    <div class="slider-dot"></div>
+                    <div class="slider-dot"></div>
+                </div>
             </div>
         </div>
-    </header>
+    </section>
 
+    <!-- ============ PRODUCT SECTION — 3 per row ============ -->
     <section class="products-section">
 
         <!-- Flash Sale Row -->
@@ -935,116 +935,31 @@
             </div>
         </div>
     </section>
-    <section class="about-section">
-        <div class="about-container">
-            <div class="about-text">
-                <h2>About <span>NexGen Infrastructure</span></h2>
-                <p>Founded on principles of extreme operational accountability and decentralized clarity, NexGen bridges consumer hardware demands with web3 automation systems.</p>
-                <p>We source, engineer, and rigorously verify components to ensure every interface node operates seamlessly within zero-trust networks globally.</p>
-                
-                <div class="about-contact">
-                    <h3>Connect With Us</h3>
-                    <div class="contact-buttons">
-                        <a href="#" class="contact-btn whatsapp" target="_blank">
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.503-5.713-1.458L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.42 9.863-9.855.001-2.632-1.022-5.101-2.881-6.963C16.533 1.975 14.07 1.15 11.44 1.15c-5.438 0-9.863 4.421-9.865 9.856 0 1.683.45 3.327 1.303 4.773L1.874 21.8l6.113-1.605A9.8 9.8 0 0 0 6.648 19.15z"/></svg>
-                            WhatsApp
-                        </a>
-                        
-                        <a href="#" class="contact-btn messenger" target="_blank">
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 0C5.37 0 0 4.97 0 11.11c0 3.5 1.74 6.62 4.47 8.65V24l4.05-2.24c1.1.3 2.27.47 3.48.47 6.63 0 12-4.97 12-11.12C24 4.97 18.63 0 12 0zm1.2 14.56l-3.04-3.26-5.93 3.26 6.52-6.94 3.09 3.26 5.88-3.26-6.52 6.94z"/></svg>
-                            Messenger
-                        </a>
-                        
-                        <a href="tel:#" class="contact-btn phone">
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                            Call Now
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="about-stats">
-                <div class="about-stat-box">
-                    <h4>5+</h4>
-                    <p>Global Markets</p>
-                </div>
-                <div class="about-stat-box">
-                    <h4>99.9%</h4>
-                    <p>Uptime Record</p>
-                </div>
-                <div class="about-stat-box">
-                    <h4>24/7</h4>
-                    <p>Automated Audits</p>
-                </div>
-                <div class="about-stat-box">
-                    <h4>30+</h4>
-                    <p>Order Today</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        &copy; 2026 TasinSaimon
-    </footer>
 
     <script>
-        // Category Dropdown Toggle
-        const menuToggle = document.getElementById('categoryMenuToggle');
-        const categoryDropdown = document.getElementById('categoryDropdown');
+        // Slider Logic
+        const images = document.querySelectorAll('.slider-image');
+        const dots = document.querySelectorAll('.slider-dot');
+        let current = 0;
 
-        menuToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            categoryDropdown.classList.toggle('show');
-            menuToggle.classList.toggle('active');
-        });
+        function goTo(index) {
+            images[current].classList.remove('active');
+            dots[current].classList.remove('active');
+            current = index;
+            images[current].classList.add('active');
+            dots[current].classList.add('active');
+        }
 
+        dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+        setInterval(() => goTo((current + 1) % images.length), 3500);
+
+        // Close dropdown on outside click
         document.addEventListener('click', (e) => {
-            if (!categoryDropdown.contains(e.target) && e.target !== menuToggle) {
-                categoryDropdown.classList.remove('show');
-                menuToggle.classList.remove('active');
+            if (!e.target.closest('.menu-container')) {
+                document.getElementById('dropMenu').classList.remove('show');
+                document.querySelector('.menu-dots').classList.remove('active');
             }
         });
-
-        // Multi-Image Carousel Logic
-        const sliderImages = document.querySelectorAll('#heroSlider .slider-image');
-        const dotsContainer = document.getElementById('sliderDots');
-        let currentSlide = 0;
-        const slideIntervalTime = 4000;
-
-        sliderImages.forEach((_, index) => {
-            const dot = document.createElement('div');
-            dot.classList.add('slider-dot');
-            if (index === 0) dot.classList.add('active');
-            
-            dot.addEventListener('click', () => goToSlide(index));
-            dotsContainer.appendChild(dot);
-        });
-
-        const dots = document.querySelectorAll('.slider-dot');
-
-        function goToSlide(slideIndex) {
-            sliderImages[currentSlide].classList.remove('active');
-            dots[currentSlide].classList.remove('active');
-
-            currentSlide = slideIndex;
-
-            sliderImages[currentSlide].classList.add('active');
-            dots[currentSlide].classList.add('active');
-        }
-
-        function nextSlide() {
-            let nextIndex = (currentSlide + 1) % sliderImages.length;
-            goToSlide(nextIndex);
-        }
-
-        let slideInterval = setInterval(nextSlide, slideIntervalTime);
-
-        function resetInterval() {
-            clearInterval(slideInterval);
-            slideInterval = setInterval(nextSlide, slideIntervalTime);
-        }
-        
-        dots.forEach(dot => dot.addEventListener('click', resetInterval));
     </script>
 </body>
 </html>
