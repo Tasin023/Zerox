@@ -24,11 +24,6 @@
             box-sizing: border-box;
             font-family: var(--font-main);
         }
-        .about-section {
-            padding: 100px 8%;
-            background: #090b11;
-            border-top: 1px solid rgba(255,255,255,0.02);
-        }        
 
         .about-contact {
             margin-top: 30px;
@@ -47,11 +42,6 @@
             gap: 12px;
             flex-wrap: wrap;
         }
-                    .about-stats {
-                width: 100%;
-                grid-template-columns: 1fr 1fr; /* Retains clean 2x2 grid format on phone cards */
-                gap: 12px;
-            }
 
         .next-level-price {
             position: relative;
@@ -69,18 +59,6 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0px rgba(255, 255, 255, 0.1);
             animation: gentle-float 4s ease-in-out infinite;
         }
-        .about-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 60px;
-            flex-wrap: wrap;
-        }
-
-        .about-text { flex: 1.2; min-width: 320px; }
-        .about-text h2 { font-size: 2.5rem; margin-bottom: 20px; font-weight: 800; }
-        .about-text h2 span { color: var(--accent-pink); }
-        .about-text p { color: var(--text-muted); margin-bottom: 20px; font-size: 1.1rem; }        
 
         .next-level-price .currency {
             font-size: 1.1rem;
@@ -108,13 +86,7 @@
             color: var(--text-muted);
             margin-left: 1px;
         }
-        .about-stat-box {
-            background: var(--card-top-bg);
-            padding: 30px 20px;
-            border-radius: 16px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.02);
-        }
+
         .next-level-price::after {
             content: '';
             position: absolute;
@@ -432,7 +404,8 @@
         }
 
         .slider-dot {
-            width: 8px; height: 8px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.2);
             cursor: pointer;
@@ -448,7 +421,6 @@
 
         /* ============================================
            REDESIGNED PRODUCT SECTION — 3 per row
-           Inspired by the reference screenshot layout
            ============================================ */
         .products-section {
             padding: 60px 4%;
@@ -474,7 +446,8 @@
         }
 
         .section-header h2 .dot {
-            width: 8px; height: 8px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: var(--accent-blue);
             box-shadow: 0 0 8px var(--accent-blue);
@@ -654,10 +627,16 @@
             letter-spacing: 1px;
         }
 
-        /* Add to cart button */
-        .product-cart-btn {
+        /* Modified Dual Action Buttons Wrapper */
+        .product-action-row {
+            display: flex;
+            gap: 6px;
             margin-top: 6px;
             width: 100%;
+        }
+
+        .product-cart-btn, .product-buy-btn {
+            flex: 1;
             padding: 7px 0;
             border: none;
             border-radius: 6px;
@@ -667,9 +646,10 @@
             letter-spacing: 0.5px;
             cursor: pointer;
             transition: all 0.25s ease;
-            color: #000;
         }
 
+        /* Cart Button Defaults (Themed background, dark text) */
+        .product-cart-btn { color: #000; }
         .product-card.theme-blue .product-cart-btn { background: var(--accent-blue); }
         .product-card.theme-pink .product-cart-btn { background: var(--accent-pink); color: #fff; }
         .product-card.theme-orange .product-cart-btn { background: var(--accent-orange); color: #fff; }
@@ -677,7 +657,17 @@
         .product-card.theme-yellow .product-cart-btn { background: #ffd740; }
         .product-card.theme-purple .product-cart-btn { background: #7c4dff; color: #fff; }
 
-        .product-cart-btn:hover { opacity: 0.85; transform: scale(0.98); }
+        /* Buy Now Button Defaults (Solid Dark/Glassy variation to contrast gracefully) */
+        .product-buy-btn {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .product-cart-btn:hover, .product-buy-btn:hover { 
+            opacity: 0.85; 
+            transform: scale(0.97); 
+        }
 
         /* Row label divider */
         .row-divider {
@@ -717,12 +707,12 @@
         @media (max-width: 480px) {
             .product-name { font-size: 11px; }
             .price-current { font-size: 13px; }
+            .product-action-row { flex-direction: column; gap: 4px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
     <nav>
         <div class="logo">NEX<span>GEN</span></div>
         <div class="nav-links">
@@ -748,7 +738,6 @@
         </div>
     </nav>
 
-    <!-- Search Banner -->
     <div class="search-banner">
         <div class="search-container">
             <div class="search-form">
@@ -758,12 +747,19 @@
         </div>
     </div>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <h1>Next-Gen Tech<br>at Your <span>Fingertips</span></h1>
             <p>Explore the latest in hardware, blockchain gadgets, and cutting-edge accessories — delivered fast.</p>
             <button class="btn-primary">Shop Now →</button>
+            <div class="about-contact">
+                <h3>Contact Us</h3>
+                <div class="contact-buttons">
+                    <a href="#" class="contact-btn whatsapp">💬 WhatsApp</a>
+                    <a href="#" class="contact-btn messenger">💙 Messenger</a>
+                    <a href="#" class="contact-btn phone">📞 Call</a>
+                </div>
+            </div>
         </div>
         <div class="hero-showcase">
             <div class="terminal-box">
@@ -781,17 +777,14 @@
         </div>
     </section>
 
-    <!-- ============ PRODUCT SECTION — 3 per row ============ -->
     <section class="products-section">
 
-        <!-- Flash Sale Row -->
         <div class="section-header">
             <h2><span class="dot"></span> Flash Sale 🔥</h2>
             <a href="#" class="view-all">Shop More →</a>
         </div>
 
         <div class="product-grid">
-            <!-- Product 1 -->
             <div class="product-card theme-blue">
                 <div class="product-img-wrap">
                     <span class="discount-badge">-42%</span>
@@ -805,11 +798,13 @@
                         <span class="price-current">৳2,450</span>
                         <span class="price-original">৳4,200</span>
                     </div>
-                    <button class="product-cart-btn">Add to Cart</button>
+                    <div class="product-action-row">
+                        <button class="product-cart-btn">Add to Cart</button>
+                        <button class="product-buy-btn">Buy Now</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Product 2 -->
             <div class="product-card theme-pink">
                 <div class="product-img-wrap">
                     <span class="discount-badge">-55%</span>
@@ -822,11 +817,13 @@
                         <span class="price-current">৳1,890</span>
                         <span class="price-original">৳4,200</span>
                     </div>
-                    <button class="product-cart-btn">Add to Cart</button>
+                    <div class="product-action-row">
+                        <button class="product-cart-btn">Add to Cart</button>
+                        <button class="product-buy-btn">Buy Now</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Product 3 -->
             <div class="product-card theme-orange">
                 <div class="product-img-wrap">
                     <span class="discount-badge">-30%</span>
@@ -840,14 +837,15 @@
                         <span class="price-current">৳18,500</span>
                         <span class="price-original">৳26,400</span>
                     </div>
-                    <button class="product-cart-btn">Add to Cart</button>
+                    <div class="product-action-row">
+                        <button class="product-cart-btn">Add to Cart</button>
+                        <button class="product-buy-btn">Buy Now</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Row Divider -->
             <div class="row-divider"><span>Daily Deals</span></div>
 
-            <!-- Product 4 -->
             <div class="product-card theme-green">
                 <div class="product-img-wrap">
                     <span class="discount-badge">-67%</span>
@@ -860,11 +858,13 @@
                         <span class="price-current">৳3,200</span>
                         <span class="price-original">৳9,700</span>
                     </div>
-                    <button class="product-cart-btn">Add to Cart</button>
+                    <div class="product-action-row">
+                        <button class="product-cart-btn">Add to Cart</button>
+                        <button class="product-buy-btn">Buy Now</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Product 5 -->
             <div class="product-card theme-yellow">
                 <div class="product-img-wrap">
                     <span class="discount-badge">-48%</span>
@@ -877,11 +877,13 @@
                         <span class="price-current">৳2,750</span>
                         <span class="price-original">৳5,280</span>
                     </div>
-                    <button class="product-cart-btn">Add to Cart</button>
+                    <div class="product-action-row">
+                        <button class="product-cart-btn">Add to Cart</button>
+                        <button class="product-buy-btn">Buy Now</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Product 6 -->
             <div class="product-card theme-purple">
                 <div class="product-img-wrap">
                     <span class="discount-badge">-17%</span>
@@ -894,14 +896,15 @@
                         <span class="price-current">৳1,190</span>
                         <span class="price-original">৳1,430</span>
                     </div>
-                    <button class="product-cart-btn">Add to Cart</button>
+                    <div class="product-action-row">
+                        <button class="product-cart-btn">Add to Cart</button>
+                        <button class="product-buy-btn">Buy Now</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Row Divider -->
             <div class="row-divider"><span>New Arrivals</span></div>
 
-            <!-- Product 7 -->
             <div class="product-card theme-blue">
                 <div class="product-img-wrap">
                     <span class="discount-badge">-22%</span>
@@ -915,11 +918,13 @@
                         <span class="price-current">৳4,100</span>
                         <span class="price-original">৳5,260</span>
                     </div>
-                    <button class="product-cart-btn">Add to Cart</button>
+                    <div class="product-action-row">
+                        <button class="product-cart-btn">Add to Cart</button>
+                        <button class="product-buy-btn">Buy Now</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Product 8 -->
             <div class="product-card theme-pink">
                 <div class="product-img-wrap">
                     <span class="discount-badge">-35%</span>
@@ -932,11 +937,13 @@
                         <span class="price-current">৳1,350</span>
                         <span class="price-original">৳2,080</span>
                     </div>
-                    <button class="product-cart-btn">Add to Cart</button>
+                    <div class="product-action-row">
+                        <button class="product-cart-btn">Add to Cart</button>
+                        <button class="product-buy-btn">Buy Now</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Product 9 -->
             <div class="product-card theme-orange">
                 <div class="product-img-wrap">
                     <span class="discount-badge">-60%</span>
@@ -950,54 +957,10 @@
                         <span class="price-current">৳880</span>
                         <span class="price-original">৳2,200</span>
                     </div>
-                    <button class="product-cart-btn">Add to Cart</button>
-                </div>
-            </div>
-        </div>
-    </section>
-     <section class="about-section">
-        <div class="about-container">
-            <div class="about-text">
-                <h2>About <span>NexGen Infrastructure</span></h2>
-                <p>Founded on principles of extreme operational accountability and decentralized clarity, NexGen bridges consumer hardware demands with web3 automation systems.</p>
-                <p>We source, engineer, and rigorously verify components to ensure every interface node operates seamlessly within zero-trust networks globally.</p>
-                
-                <div class="about-contact">
-                    <h3>Connect With Us</h3>
-                    <div class="contact-buttons">
-                        <a href="#" class="contact-btn whatsapp" target="_blank">
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.503-5.713-1.458L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.42 9.863-9.855.001-2.632-1.022-5.101-2.881-6.963C16.533 1.975 14.07 1.15 11.44 1.15c-5.438 0-9.863 4.421-9.865 9.856 0 1.683.45 3.327 1.303 4.773L1.874 21.8l6.113-1.605A9.8 9.8 0 0 0 6.648 19.15z"/></svg>
-                            WhatsApp
-                        </a>
-                        
-                        <a href="#" class="contact-btn messenger" target="_blank">
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 0C5.37 0 0 4.97 0 11.11c0 3.5 1.74 6.62 4.47 8.65V24l4.05-2.24c1.1.3 2.27.47 3.48.47 6.63 0 12-4.97 12-11.12C24 4.97 18.63 0 12 0zm1.2 14.56l-3.04-3.26-5.93 3.26 6.52-6.94 3.09 3.26 5.88-3.26-6.52 6.94z"/></svg>
-                            Messenger
-                        </a>
-                        
-                        <a href="tel:#" class="contact-btn phone">
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                            Call Now
-                        </a>
+                    <div class="product-action-row">
+                        <button class="product-cart-btn">Add to Cart</button>
+                        <button class="product-buy-btn">Buy Now</button>
                     </div>
-                </div>
-            </div>
-            <div class="about-stats">
-                <div class="about-stat-box">
-                    <h4>5+</h4>
-                    <p>Global Markets</p>
-                </div>
-                <div class="about-stat-box">
-                    <h4>99.9%</h4>
-                    <p>Uptime Record</p>
-                </div>
-                <div class="about-stat-box">
-                    <h4>24/7</h4>
-                    <p>Automated Audits</p>
-                </div>
-                <div class="about-stat-box">
-                    <h4>30+</h4>
-                    <p>Order Today</p>
                 </div>
             </div>
         </div>
