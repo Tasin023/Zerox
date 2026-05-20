@@ -404,8 +404,7 @@
         }
 
         .slider-dot {
-            width: 8px;
-            height: 8px;
+            width: 8px; height: 8px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.2);
             cursor: pointer;
@@ -421,6 +420,7 @@
 
         /* ============================================
            REDESIGNED PRODUCT SECTION — 3 per row
+           Inspired by the reference screenshot layout
            ============================================ */
         .products-section {
             padding: 60px 4%;
@@ -446,8 +446,7 @@
         }
 
         .section-header h2 .dot {
-            width: 8px;
-            height: 8px;
+            width: 8px; height: 8px;
             border-radius: 50%;
             background: var(--accent-blue);
             box-shadow: 0 0 8px var(--accent-blue);
@@ -627,16 +626,10 @@
             letter-spacing: 1px;
         }
 
-        /* Modified Dual Action Buttons Wrapper */
-        .product-action-row {
-            display: flex;
-            gap: 6px;
+        /* Add to cart button */
+        .product-cart-btn {
             margin-top: 6px;
             width: 100%;
-        }
-
-        .product-cart-btn, .product-buy-btn {
-            flex: 1;
             padding: 7px 0;
             border: none;
             border-radius: 6px;
@@ -646,10 +639,9 @@
             letter-spacing: 0.5px;
             cursor: pointer;
             transition: all 0.25s ease;
+            color: #000;
         }
 
-        /* Cart Button Defaults (Themed background, dark text) */
-        .product-cart-btn { color: #000; }
         .product-card.theme-blue .product-cart-btn { background: var(--accent-blue); }
         .product-card.theme-pink .product-cart-btn { background: var(--accent-pink); color: #fff; }
         .product-card.theme-orange .product-cart-btn { background: var(--accent-orange); color: #fff; }
@@ -657,17 +649,7 @@
         .product-card.theme-yellow .product-cart-btn { background: #ffd740; }
         .product-card.theme-purple .product-cart-btn { background: #7c4dff; color: #fff; }
 
-        /* Buy Now Button Defaults (Solid Dark/Glassy variation to contrast gracefully) */
-        .product-buy-btn {
-            background: rgba(255, 255, 255, 0.08);
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-        }
-
-        .product-cart-btn:hover, .product-buy-btn:hover { 
-            opacity: 0.85; 
-            transform: scale(0.97); 
-        }
+        .product-cart-btn:hover { opacity: 0.85; transform: scale(0.98); }
 
         /* Row label divider */
         .row-divider {
@@ -707,12 +689,12 @@
         @media (max-width: 480px) {
             .product-name { font-size: 11px; }
             .price-current { font-size: 13px; }
-            .product-action-row { flex-direction: column; gap: 4px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Navigation -->
     <nav>
         <div class="logo">NEX<span>GEN</span></div>
         <div class="nav-links">
@@ -738,6 +720,7 @@
         </div>
     </nav>
 
+    <!-- Search Banner -->
     <div class="search-banner">
         <div class="search-container">
             <div class="search-form">
@@ -747,6 +730,7 @@
         </div>
     </div>
 
+    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <h1>Next-Gen Tech<br>at Your <span>Fingertips</span></h1>
@@ -777,14 +761,17 @@
         </div>
     </section>
 
+    <!-- ============ PRODUCT SECTION — 3 per row ============ -->
     <section class="products-section">
 
+        <!-- Flash Sale Row -->
         <div class="section-header">
             <h2><span class="dot"></span> Flash Sale 🔥</h2>
             <a href="#" class="view-all">Shop More →</a>
         </div>
 
         <div class="product-grid">
+            <!-- Product 1 -->
             <div class="product-card theme-blue">
                 <div class="product-img-wrap">
                     <span class="discount-badge">-42%</span>
@@ -798,13 +785,11 @@
                         <span class="price-current">৳2,450</span>
                         <span class="price-original">৳4,200</span>
                     </div>
-                    <div class="product-action-row">
-                        <button class="product-cart-btn">Add to Cart</button>
-                        <button class="product-buy-btn">Buy Now</button>
-                    </div>
+                    <button class="product-cart-btn">Add to Cart</button>
                 </div>
             </div>
 
+            <!-- Product 2 -->
             <div class="product-card theme-pink">
                 <div class="product-img-wrap">
                     <span class="discount-badge">-55%</span>
@@ -817,13 +802,11 @@
                         <span class="price-current">৳1,890</span>
                         <span class="price-original">৳4,200</span>
                     </div>
-                    <div class="product-action-row">
-                        <button class="product-cart-btn">Add to Cart</button>
-                        <button class="product-buy-btn">Buy Now</button>
-                    </div>
+                    <button class="product-cart-btn">Add to Cart</button>
                 </div>
             </div>
 
+            <!-- Product 3 -->
             <div class="product-card theme-orange">
                 <div class="product-img-wrap">
                     <span class="discount-badge">-30%</span>
@@ -837,15 +820,14 @@
                         <span class="price-current">৳18,500</span>
                         <span class="price-original">৳26,400</span>
                     </div>
-                    <div class="product-action-row">
-                        <button class="product-cart-btn">Add to Cart</button>
-                        <button class="product-buy-btn">Buy Now</button>
-                    </div>
+                    <button class="product-cart-btn">Add to Cart</button>
                 </div>
             </div>
 
+            <!-- Row Divider -->
             <div class="row-divider"><span>Daily Deals</span></div>
 
+            <!-- Product 4 -->
             <div class="product-card theme-green">
                 <div class="product-img-wrap">
                     <span class="discount-badge">-67%</span>
@@ -858,13 +840,11 @@
                         <span class="price-current">৳3,200</span>
                         <span class="price-original">৳9,700</span>
                     </div>
-                    <div class="product-action-row">
-                        <button class="product-cart-btn">Add to Cart</button>
-                        <button class="product-buy-btn">Buy Now</button>
-                    </div>
+                    <button class="product-cart-btn">Add to Cart</button>
                 </div>
             </div>
 
+            <!-- Product 5 -->
             <div class="product-card theme-yellow">
                 <div class="product-img-wrap">
                     <span class="discount-badge">-48%</span>
@@ -877,13 +857,11 @@
                         <span class="price-current">৳2,750</span>
                         <span class="price-original">৳5,280</span>
                     </div>
-                    <div class="product-action-row">
-                        <button class="product-cart-btn">Add to Cart</button>
-                        <button class="product-buy-btn">Buy Now</button>
-                    </div>
+                    <button class="product-cart-btn">Add to Cart</button>
                 </div>
             </div>
 
+            <!-- Product 6 -->
             <div class="product-card theme-purple">
                 <div class="product-img-wrap">
                     <span class="discount-badge">-17%</span>
@@ -896,15 +874,14 @@
                         <span class="price-current">৳1,190</span>
                         <span class="price-original">৳1,430</span>
                     </div>
-                    <div class="product-action-row">
-                        <button class="product-cart-btn">Add to Cart</button>
-                        <button class="product-buy-btn">Buy Now</button>
-                    </div>
+                    <button class="product-cart-btn">Add to Cart</button>
                 </div>
             </div>
 
+            <!-- Row Divider -->
             <div class="row-divider"><span>New Arrivals</span></div>
 
+            <!-- Product 7 -->
             <div class="product-card theme-blue">
                 <div class="product-img-wrap">
                     <span class="discount-badge">-22%</span>
@@ -918,13 +895,11 @@
                         <span class="price-current">৳4,100</span>
                         <span class="price-original">৳5,260</span>
                     </div>
-                    <div class="product-action-row">
-                        <button class="product-cart-btn">Add to Cart</button>
-                        <button class="product-buy-btn">Buy Now</button>
-                    </div>
+                    <button class="product-cart-btn">Add to Cart</button>
                 </div>
             </div>
 
+            <!-- Product 8 -->
             <div class="product-card theme-pink">
                 <div class="product-img-wrap">
                     <span class="discount-badge">-35%</span>
@@ -937,13 +912,11 @@
                         <span class="price-current">৳1,350</span>
                         <span class="price-original">৳2,080</span>
                     </div>
-                    <div class="product-action-row">
-                        <button class="product-cart-btn">Add to Cart</button>
-                        <button class="product-buy-btn">Buy Now</button>
-                    </div>
+                    <button class="product-cart-btn">Add to Cart</button>
                 </div>
             </div>
 
+            <!-- Product 9 -->
             <div class="product-card theme-orange">
                 <div class="product-img-wrap">
                     <span class="discount-badge">-60%</span>
@@ -957,10 +930,7 @@
                         <span class="price-current">৳880</span>
                         <span class="price-original">৳2,200</span>
                     </div>
-                    <div class="product-action-row">
-                        <button class="product-cart-btn">Add to Cart</button>
-                        <button class="product-buy-btn">Buy Now</button>
-                    </div>
+                    <button class="product-cart-btn">Add to Cart</button>
                 </div>
             </div>
         </div>
