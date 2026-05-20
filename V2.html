@@ -1,965 +1,1227 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NexGen E-Commerce | Tech & Blockchain Store</title>
     <style>
-        /* CSS Reset & Core Variables */
+        /* ===================== THEME VARIABLES ===================== */
         :root {
-            --bg-dark: #0a0d14;
-            --card-top-bg: #141722;
-            --card-bottom-bg: #1c2030;
             --accent-blue: #00d2ff;
             --accent-pink: #d946ef;
             --accent-orange: #ff6b35;
-            --text-light: #e2e8f0;
-            --text-muted: #8a99ad;
+            --accent-green: #00e676;
+            --accent-yellow: #ffd740;
+            --accent-purple: #7c4dff;
             --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --transition-speed: 0.3s;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: var(--font-main);
+        [data-theme="dark"] {
+            --bg: #0a0d14;
+            --bg2: #0d1017;
+            --card-top: #141722;
+            --card-bg: #1c2030;
+            --nav-bg: rgba(10,13,20,0.88);
+            --text: #e2e8f0;
+            --text-muted: #8a99ad;
+            --border: rgba(255,255,255,0.05);
+            --search-bg: rgba(20,23,34,0.6);
+            --input-border: rgba(255,255,255,0.08);
+            --about-bg: #111520;
+            --divider: rgba(255,255,255,0.06);
+            --shadow: rgba(0,0,0,0.5);
         }
 
-        .about-contact {
-            margin-top: 30px;
+        [data-theme="light"] {
+            --bg: #f0f4ff;
+            --bg2: #e8eeff;
+            --card-top: #ffffff;
+            --card-bg: #ffffff;
+            --nav-bg: rgba(240,244,255,0.92);
+            --text: #1a1f36;
+            --text-muted: #5a6484;
+            --border: rgba(0,0,0,0.07);
+            --search-bg: rgba(255,255,255,0.85);
+            --input-border: rgba(0,0,0,0.12);
+            --about-bg: #e2e8ff;
+            --divider: rgba(0,0,0,0.07);
+            --shadow: rgba(100,120,200,0.15);
         }
 
-        .about-contact h3 {
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-            opacity: 0.8;
-        }
-
-        .contact-buttons {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .next-level-price {
-            position: relative;
-            display: inline-flex;
-            align-items: baseline;
-            font-family: "SF Pro Display", -apple-system, system-ui, sans-serif;
-            font-weight: 800;
-            line-height: 1;
-            color: var(--text-main);
-            padding: 6px 14px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0px rgba(255, 255, 255, 0.1);
-            animation: gentle-float 4s ease-in-out infinite;
-        }
-
-        .next-level-price .currency {
-            font-size: 1.1rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-pink));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-right: 2px;
-            align-self: flex-start;
-            position: relative;
-            top: 2px;
-        }
-
-        .next-level-price .amount {
-            font-size: 2.25rem;
-            letter-spacing: -0.03em;
-            background: linear-gradient(to bottom, #ffffff 40%, #e2e8f0 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .next-level-price .cent {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            margin-left: 1px;
-        }
-
-        .next-level-price::after {
-            content: '';
-            position: absolute;
-            inset: -1px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-pink));
-            opacity: 0.15;
-            z-index: -1;
-            filter: blur(8px);
-        }
-
-        .contact-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            text-decoration: none;
-            color: #ffffff;
-            transition: transform 0.2s ease, filter 0.2s ease;
-        }
-
-        .contact-btn:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.1);
-        }
-
-        .contact-btn.whatsapp { background-color: #25D366; }
-        .contact-btn.messenger { background-color: #0084FF; }
-        .contact-btn.phone { background-color: #333333; }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:var(--font-main); }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-light);
+            background-color: var(--bg);
+            color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
-            background-image: radial-gradient(circle at 80% 20%, rgba(217, 70, 239, 0.04), transparent 40%),
-                              radial-gradient(circle at 10% 60%, rgba(0, 210, 255, 0.04), transparent 40%);
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
 
-        .btn-primary {
-            background: var(--accent-blue);
-            color: #000;
-            padding: 10px 24px;
-            border: none;
-            border-radius: 25px;
-            font-weight: bold;
+        [data-theme="dark"] body {
+            background-image: radial-gradient(circle at 80% 20%, rgba(217,70,239,0.04), transparent 40%),
+                              radial-gradient(circle at 10% 60%, rgba(0,210,255,0.04), transparent 40%);
+        }
+
+        /* ===================== COLOR BURST OVERLAY ===================== */
+        #color-burst {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0;
+            background: conic-gradient(
+                from 0deg,
+                #ff6b35, #d946ef, #00d2ff, #00e676,
+                #ffd740, #7c4dff, #ff6b35
+            );
+            background-size: 400% 400%;
+            animation: none;
+        }
+
+        #color-burst.playing {
+            animation: colorExplosion 1.2s ease-in-out forwards;
+        }
+
+        @keyframes colorExplosion {
+            0%   { opacity: 0; transform: scale(0.5) rotate(0deg); border-radius: 50%; }
+            30%  { opacity: 1; transform: scale(1.2) rotate(180deg); border-radius: 20%; }
+            60%  { opacity: 0.85; transform: scale(1) rotate(360deg); border-radius: 5%; }
+            85%  { opacity: 0.6; transform: scale(1) rotate(360deg); border-radius: 0%; }
+            100% { opacity: 0; transform: scale(1) rotate(360deg); border-radius: 0%; }
+        }
+
+        /* ===================== DARK/LIGHT TOGGLE ===================== */
+        .theme-toggle {
+            position: relative;
+            width: 56px;
+            height: 28px;
+            flex-shrink: 0;
+        }
+
+        .theme-toggle input { display: none; }
+
+        .toggle-track {
+            width: 100%;
+            height: 100%;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #1c2030, #0a0d14);
+            border: 1.5px solid rgba(255,255,255,0.1);
             cursor: pointer;
-            box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
-            transition: all 0.3s ease;
-            font-size: 14px;
+            position: relative;
+            transition: background 0.4s ease, border-color 0.4s;
+            display: flex;
+            align-items: center;
+            padding: 0 4px;
+            justify-content: space-between;
         }
 
-        .btn-primary:hover {
-            box-shadow: 0 0 25px rgba(0, 210, 255, 0.6);
-            transform: translateY(-2px);
+        .toggle-track .t-icon {
+            font-size: 12px;
+            z-index: 1;
+            line-height: 1;
         }
 
-        /* Navigation */
+        .toggle-thumb {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-pink));
+            left: 4px;
+            transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), background 0.4s;
+            box-shadow: 0 2px 8px rgba(0,210,255,0.4);
+            z-index: 2;
+        }
+
+        [data-theme="light"] .toggle-thumb {
+            transform: translateX(28px);
+            background: linear-gradient(135deg, #ffd740, #ff6b35);
+            box-shadow: 0 2px 8px rgba(255,215,64,0.5);
+        }
+
+        [data-theme="light"] .toggle-track {
+            background: linear-gradient(135deg, #ffecd2, #fffde7);
+            border-color: rgba(255,180,50,0.3);
+        }
+
+        /* ===================== NAV ===================== */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 8%;
-            background: rgba(10, 13, 20, 0.85);
-            backdrop-filter: blur(10px);
+            padding: 14px 5%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid var(--border);
+            gap: 12px;
+            transition: background 0.5s;
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            flex-shrink: 0;
-        }
-
+        .logo { font-size: 22px; font-weight: 800; letter-spacing: 1px; flex-shrink: 0; color: var(--text); }
         .logo span { color: var(--accent-blue); }
 
-        .nav-links {
-            display: flex;
-            align-items: center;
-        }
-
+        .nav-links { display: flex; align-items: center; }
         .nav-links a {
             color: var(--text-muted);
             text-decoration: none;
-            margin: 0 15px;
+            margin: 0 12px;
             transition: color 0.3s;
             font-size: 14px;
             font-weight: 500;
             white-space: nowrap;
         }
-
         .nav-links a:hover { color: var(--accent-blue); }
 
-        .search-banner {
-            padding: 20px 8% 0 8%;
-            display: flex;
-            justify-content: center;
-            width: 100%;
+        .nav-actions { display:flex; align-items:center; gap:14px; flex-shrink:0; }
+
+        .btn-primary {
+            background: var(--accent-blue);
+            color: #000;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0,210,255,0.3);
+            transition: all 0.3s;
+            font-size: 13px;
+            white-space: nowrap;
         }
-
-        .search-container {
-            width: 100%;
-            max-width: 600px;
-            position: relative;
-        }
-
-        .search-form { display: flex; width: 100%; }
-
-        .search-input {
-            width: 100%;
-            background: rgba(20, 23, 34, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-            padding: 12px 20px 12px 48px;
-            color: var(--text-light);
-            font-size: 15px;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .search-input:focus {
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.2);
-            background: rgba(20, 23, 34, 0.9);
-        }
-
-        .search-input::placeholder { color: var(--text-muted); opacity: 0.7; }
-
-        .search-icon {
-            position: absolute;
-            left: 18px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            pointer-events: none;
-            transition: color 0.3s ease;
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            flex-shrink: 0;
-        }
+        .btn-primary:hover { box-shadow: 0 0 25px rgba(0,210,255,0.6); transform: translateY(-2px); }
 
         .menu-container { position: relative; }
-
-        .menu-dots {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            padding: 5px;
-        }
-
-        .menu-dots span {
-            display: block;
-            width: 5px;
-            height: 5px;
-            background-color: var(--text-light);
-            border-radius: 50%;
-            transition: 0.3s;
-            pointer-events: none;
-        }
-
-        .menu-dots:hover span, .menu-dots.active span {
-            background-color: var(--accent-blue);
-            box-shadow: 0 0 8px var(--accent-blue);
-        }
+        .menu-dots { display:flex; flex-direction:column; gap:5px; cursor:pointer; padding:5px; }
+        .menu-dots span { display:block; width:5px; height:5px; background-color:var(--text); border-radius:50%; transition:0.3s; pointer-events:none; }
+        .menu-dots:hover span, .menu-dots.active span { background-color:var(--accent-blue); box-shadow:0 0 8px var(--accent-blue); }
 
         .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 40px;
-            right: 0;
-            background: var(--card-bottom-bg);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 15px;
-            min-width: 200px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
-            z-index: 200;
-            flex-direction: column;
-            gap: 5px;
-            backdrop-filter: blur(10px);
+            display:none; position:absolute; top:40px; right:0;
+            background:var(--card-bg);
+            border:1px solid var(--border);
+            border-radius:12px; padding:15px; min-width:180px;
+            box-shadow:0 15px 40px var(--shadow);
+            z-index:200; flex-direction:column; gap:5px;
+            backdrop-filter:blur(10px);
         }
+        .dropdown-menu.show { display:flex; animation:fadeIn 0.2s ease; }
+        @keyframes fadeIn { from{opacity:0;transform:translateY(-10px)} to{opacity:1;transform:translateY(0)} }
+        .dropdown-menu h4 { font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; border-bottom:1px solid var(--divider); padding-bottom:8px; }
+        .dropdown-menu a { color:var(--text); text-decoration:none; font-size:13px; padding:9px 10px; border-radius:8px; transition:all 0.3s; display:flex; align-items:center; gap:10px; }
+        .dropdown-menu a:hover { background:rgba(0,210,255,0.08); color:var(--accent-blue); }
 
-        .dropdown-menu.show {
-            display: flex;
-            animation: fadeIn 0.2s ease-in-out;
+        /* ===================== SEARCH BANNER ===================== */
+        .search-banner { padding: 18px 5% 0; display:flex; justify-content:center; }
+        .search-container { width:100%; max-width:580px; position:relative; }
+        .search-form { display:flex; width:100%; }
+        .search-input {
+            width:100%; background:var(--search-bg);
+            border:1px solid var(--input-border);
+            border-radius:24px; padding:11px 18px 11px 44px;
+            color:var(--text); font-size:14px; outline:none;
+            transition:all 0.3s;
         }
+        .search-input:focus { border-color:var(--accent-blue); box-shadow:0 0 18px rgba(0,210,255,0.18); }
+        .search-input::placeholder { color:var(--text-muted); opacity:0.7; }
+        .search-icon { position:absolute; left:16px; top:50%; transform:translateY(-50%); color:var(--text-muted); pointer-events:none; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .dropdown-menu h4 {
-            font-size: 11px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding-bottom: 8px;
-        }
-
-        .dropdown-menu a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-size: 13px;
-            padding: 10px 12px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .dropdown-menu a:hover {
-            background: rgba(0, 210, 255, 0.1);
-            color: var(--accent-blue);
-        }
-
-        /* Hero Section */
+        /* ===================== HERO ===================== */
         .hero {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 40px 8% 80px 8%;
+            padding: 50px 5% 70px;
             gap: 40px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero-content {
-            flex: 1;
-            min-width: 320px;
+        /* Ambient blobs */
+        .hero::before, .hero::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+        }
+        .hero::before { width:400px; height:400px; background:rgba(217,70,239,0.06); top:-80px; right:-60px; }
+        .hero::after  { width:300px; height:300px; background:rgba(0,210,255,0.06); bottom:-60px; left:-40px; }
+
+        .hero-content { flex:1; min-width:280px; position:relative; z-index:1; }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0,210,255,0.1);
+            border: 1px solid rgba(0,210,255,0.2);
+            border-radius: 20px;
+            padding: 5px 14px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 18px;
+        }
+        .hero-badge .pulse {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: var(--accent-blue);
+            animation: pulseDot 1.5s ease-in-out infinite;
+        }
+        @keyframes pulseDot {
+            0%,100% { transform:scale(1); opacity:1; }
+            50% { transform:scale(1.6); opacity:0.5; }
         }
 
         .hero h1 {
-            font-size: 3.8rem;
-            line-height: 1.15;
-            margin-bottom: 20px;
+            font-size: clamp(2rem, 5vw, 3.6rem);
+            line-height: 1.12;
+            margin-bottom: 16px;
             font-weight: 800;
+            color: var(--text);
+        }
+        .hero h1 .grad {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .hero h1 span {
-            color: var(--accent-pink);
-            text-shadow: 0 0 20px rgba(217, 70, 239, 0.2);
-        }
+        .hero p { color:var(--text-muted); margin-bottom:28px; font-size:1.05rem; max-width:480px; }
 
-        .hero p {
-            color: var(--text-muted);
-            margin-bottom: 35px;
-            font-size: 1.15rem;
-            max-width: 540px;
-        }
+        .hero-cta { display:flex; gap:12px; flex-wrap:wrap; }
 
-        .hero-showcase {
-            flex: 1;
-            min-width: 350px;
+        .btn-hero-main {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-pink));
+            color: #fff;
+            padding: 13px 28px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 4px 20px rgba(0,210,255,0.3);
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+        }
+        .btn-hero-main:hover { transform:translateY(-3px); box-shadow:0 8px 30px rgba(0,210,255,0.45); }
+
+        .btn-hero-outline {
+            background: transparent;
+            color: var(--text);
+            padding: 13px 28px;
+            border: 1.5px solid var(--input-border);
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .btn-hero-outline:hover { border-color:var(--accent-blue); color:var(--accent-blue); }
+
+        /* Hero stats */
+        .hero-stats {
             display: flex;
-            justify-content: center;
-            position: relative;
+            gap: 24px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+        .hero-stat { display:flex; flex-direction:column; }
+        .hero-stat .stat-num { font-size:1.6rem; font-weight:800; color:var(--text); line-height:1; }
+        .hero-stat .stat-num span { color:var(--accent-blue); }
+        .hero-stat .stat-label { font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.8px; margin-top:3px; }
+
+        /* Hero showcase */
+        .hero-showcase {
+            flex:1; min-width:300px; max-width:480px;
+            position:relative; z-index:1;
         }
 
         .terminal-box {
-            width: 100%;
-            max-width: 480px;
-            background: #0f121d;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 24px 60px var(--shadow);
         }
 
-        .slider-container {
-            width: 100%;
-            height: 320px;
-            position: relative;
-            overflow: hidden;
-            border-radius: 12px;
-            background: rgba(0, 0, 0, 0.2);
-        }
-
-        .slider-image {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transform: scale(1.05);
-            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
-            z-index: 1;
-        }
-
-        .slider-image.active {
-            opacity: 1;
-            transform: scale(1);
-            z-index: 2;
-        }
-
-        .slider-dots {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 15px;
-        }
-
-        .slider-dot {
-            width: 8px; height: 8px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .slider-dot.active {
-            background: var(--accent-blue);
-            box-shadow: 0 0 8px var(--accent-blue);
-            width: 20px;
-            border-radius: 4px;
-        }
-
-        /* ============================================
-           REDESIGNED PRODUCT SECTION — 3 per row
-           Inspired by the reference screenshot layout
-           ============================================ */
-        .products-section {
-            padding: 60px 4%;
-            background: linear-gradient(180deg, var(--bg-dark) 0%, #0d1017 100%);
-            border-top: 1px solid rgba(255,255,255,0.02);
-        }
-
-        .section-header {
+        /* Featured product card inside hero */
+        .hero-featured-label {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 24px;
-            padding: 0 1%;
+            margin-bottom: 14px;
+        }
+        .hero-featured-label span { font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; }
+        .hero-featured-label .live-dot {
+            display:flex; align-items:center; gap:5px;
+            font-size:11px; color:#ff6b6b; font-weight:700;
+        }
+        .hero-featured-label .live-dot::before {
+            content:''; width:6px; height:6px; background:#ff6b6b;
+            border-radius:50%; animation:pulseDot 1s infinite;
         }
 
-        .section-header h2 {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: var(--text-light);
+        .slider-container {
+            width:100%; height:260px; position:relative;
+            overflow:hidden; border-radius:14px;
+            background:var(--card-top);
+        }
+        .slider-image {
+            position:absolute; top:0; left:0; width:100%; height:100%;
+            object-fit:cover; opacity:0; transform:scale(1.05);
+            transition:opacity 0.8s ease, transform 0.8s ease; z-index:1;
+        }
+        .slider-image.active { opacity:1; transform:scale(1); z-index:2; }
+
+        .slider-dots { display:flex; justify-content:center; gap:7px; margin-top:12px; }
+        .slider-dot { width:7px; height:7px; border-radius:50%; background:var(--divider); cursor:pointer; transition:all 0.3s; }
+        .slider-dot.active { background:var(--accent-blue); box-shadow:0 0 7px var(--accent-blue); width:18px; border-radius:4px; }
+
+        /* Floating product chips */
+        .hero-chips {
             display: flex;
-            align-items: center;
-            gap: 10px;
+            gap: 8px;
+            margin-top: 14px;
+            flex-wrap: wrap;
         }
-
-        .section-header h2 .dot {
-            width: 8px; height: 8px;
-            border-radius: 50%;
-            background: var(--accent-blue);
-            box-shadow: 0 0 8px var(--accent-blue);
-            display: inline-block;
-        }
-
-        .section-header .view-all {
-            font-size: 12px;
-            color: var(--accent-blue);
-            text-decoration: none;
+        .hero-chip {
+            background: var(--card-top);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 5px 12px;
+            font-size: 11px;
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            transition: opacity 0.2s;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        .hero-chip:hover, .hero-chip.active { border-color:var(--accent-blue); color:var(--accent-blue); background:rgba(0,210,255,0.06); }
+
+        /* ===================== PRODUCTS ===================== */
+        .products-section {
+            padding: 50px 4%;
+            background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+            border-top: 1px solid var(--border);
         }
 
-        .section-header .view-all:hover { opacity: 0.7; }
+        .section-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; padding:0 1%; }
+        .section-header h2 { font-size:1.35rem; font-weight:800; color:var(--text); display:flex; align-items:center; gap:9px; }
+        .section-header h2 .dot { width:8px; height:8px; border-radius:50%; background:var(--accent-blue); box-shadow:0 0 8px var(--accent-blue); display:inline-block; }
+        .section-header .view-all { font-size:12px; color:var(--accent-blue); text-decoration:none; font-weight:600; transition:opacity 0.2s; }
+        .section-header .view-all:hover { opacity:0.7; }
 
-        /* 3-column product grid */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
+        .product-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
 
-        /* Compact product card */
         .product-card {
-            background: var(--card-bottom-bg);
+            background: var(--card-bg);
             border-radius: 12px;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.04);
+            border: 1px solid var(--border);
             transition: transform 0.25s ease, box-shadow 0.25s ease;
             display: flex;
             flex-direction: column;
             position: relative;
             cursor: pointer;
+            box-shadow: 0 2px 10px var(--shadow);
         }
+        .product-card:hover { transform:translateY(-4px); box-shadow:0 12px 30px var(--shadow); }
 
-        .product-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.5);
-        }
-
-        /* Product image area */
         .product-img-wrap {
-            background: var(--card-top-bg);
+            background: var(--card-top);
             position: relative;
-            aspect-ratio: 1 / 1;
+            aspect-ratio: 1/1;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
         }
-
-        .product-img-wrap img {
-            width: 75%;
-            height: 75%;
-            object-fit: contain;
-            display: block;
-            transition: transform 0.3s ease;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
-        }
-
-        .product-card:hover .product-img-wrap img {
-            transform: scale(1.08);
-        }
-
-        /* Glow blob behind product image */
         .product-img-wrap::before {
-            content: '';
-            position: absolute;
-            width: 70%;
-            height: 70%;
-            border-radius: 50%;
-            filter: blur(30px);
-            opacity: 0.25;
-            z-index: 0;
+            content:''; position:absolute; width:70%; height:70%;
+            border-radius:50%; filter:blur(30px); opacity:0.22; z-index:0;
         }
+        .product-img-wrap img {
+            width:75%; height:75%; object-fit:contain; display:block;
+            transition:transform 0.3s; filter:drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+            position:relative; z-index:1;
+        }
+        .product-card:hover .product-img-wrap img { transform:scale(1.08); }
 
-        .product-img-wrap img { position: relative; z-index: 1; }
+        .product-card.theme-blue   .product-img-wrap::before { background:var(--accent-blue); }
+        .product-card.theme-pink   .product-img-wrap::before { background:var(--accent-pink); }
+        .product-card.theme-orange .product-img-wrap::before { background:var(--accent-orange); }
+        .product-card.theme-green  .product-img-wrap::before { background:var(--accent-green); }
+        .product-card.theme-yellow .product-img-wrap::before { background:var(--accent-yellow); }
+        .product-card.theme-purple .product-img-wrap::before { background:var(--accent-purple); }
 
-        .product-card.theme-blue .product-img-wrap::before { background: var(--accent-blue); }
-        .product-card.theme-pink .product-img-wrap::before { background: var(--accent-pink); }
-        .product-card.theme-orange .product-img-wrap::before { background: var(--accent-orange); }
-        .product-card.theme-green .product-img-wrap::before { background: #00e676; }
-        .product-card.theme-yellow .product-img-wrap::before { background: #ffd740; }
-        .product-card.theme-purple .product-img-wrap::before { background: #7c4dff; }
-
-        /* Discount badge */
         .discount-badge {
-            position: absolute;
-            top: 7px;
-            left: 7px;
-            font-size: 10px;
-            font-weight: 800;
-            padding: 3px 7px;
-            border-radius: 4px;
-            color: #fff;
-            z-index: 2;
-            line-height: 1.3;
+            position:absolute; top:7px; left:7px; font-size:10px;
+            font-weight:800; padding:3px 7px; border-radius:4px;
+            color:#fff; z-index:2; line-height:1.3;
         }
+        .product-card.theme-blue   .discount-badge { background:var(--accent-blue); color:#000; }
+        .product-card.theme-pink   .discount-badge { background:var(--accent-pink); }
+        .product-card.theme-orange .discount-badge { background:var(--accent-orange); }
+        .product-card.theme-green  .discount-badge { background:#00c853; }
+        .product-card.theme-yellow .discount-badge { background:var(--accent-yellow); color:#000; }
+        .product-card.theme-purple .discount-badge { background:var(--accent-purple); }
 
-        .product-card.theme-blue .discount-badge { background: var(--accent-blue); color: #000; }
-        .product-card.theme-pink .discount-badge { background: var(--accent-pink); }
-        .product-card.theme-orange .discount-badge { background: var(--accent-orange); }
-        .product-card.theme-green .discount-badge { background: #00c853; }
-        .product-card.theme-yellow .discount-badge { background: #ffd740; color: #000; }
-        .product-card.theme-purple .discount-badge { background: #7c4dff; }
-
-        /* Stock badge */
         .stock-badge {
-            position: absolute;
-            bottom: 7px;
-            right: 7px;
-            font-size: 9px;
-            font-weight: 700;
-            padding: 3px 7px;
-            border-radius: 4px;
-            background: rgba(0,0,0,0.65);
-            color: #ff6b6b;
-            border: 1px solid rgba(255,107,107,0.3);
-            z-index: 2;
-            backdrop-filter: blur(4px);
+            position:absolute; bottom:7px; right:7px; font-size:9px; font-weight:700;
+            padding:3px 7px; border-radius:4px; background:rgba(0,0,0,0.65);
+            color:#ff6b6b; border:1px solid rgba(255,107,107,0.3); z-index:2; backdrop-filter:blur(4px);
         }
 
-        /* Product info area */
-        .product-info {
-            padding: 10px 10px 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            flex: 1;
-        }
+        .product-info { padding:9px 9px 11px; display:flex; flex-direction:column; gap:4px; flex:1; }
 
         .product-name {
-            font-size: 11.5px;
-            font-weight: 600;
-            color: var(--text-light);
-            line-height: 1.35;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+            font-size:11px; font-weight:600; color:var(--text);
+            line-height:1.35; display:-webkit-box;
+            -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
         }
 
-        .product-price-row {
+        .product-price-row { display:flex; align-items:center; gap:5px; margin-top:2px; flex-wrap:wrap; }
+        .price-current { font-size:13px; font-weight:800; }
+        .product-card.theme-blue   .price-current { color:var(--accent-blue); }
+        .product-card.theme-pink   .price-current { color:var(--accent-pink); }
+        .product-card.theme-orange .price-current { color:var(--accent-orange); }
+        .product-card.theme-green  .price-current { color:#69f0ae; }
+        .product-card.theme-yellow .price-current { color:#e6b800; }
+        .product-card.theme-purple .price-current { color:#b388ff; }
+
+        .price-original { font-size:10px; color:var(--text-muted); text-decoration:line-through; }
+        .product-stars  { font-size:10px; color:var(--accent-yellow); letter-spacing:1px; }
+
+        /* Dual action buttons */
+        .product-actions { display:flex; gap:5px; margin-top:6px; }
+
+        .product-cart-btn, .product-buy-btn {
+            flex:1; padding:6px 2px; border:none;
+            border-radius:6px; font-size:9px; font-weight:800;
+            text-transform:uppercase; letter-spacing:0.4px;
+            cursor:pointer; transition:all 0.25s;
+        }
+
+        /* Cart = outlined */
+        .product-cart-btn {
+            background: transparent;
+            border: 1.5px solid;
+        }
+        .product-card.theme-blue   .product-cart-btn { border-color:var(--accent-blue); color:var(--accent-blue); }
+        .product-card.theme-pink   .product-cart-btn { border-color:var(--accent-pink); color:var(--accent-pink); }
+        .product-card.theme-orange .product-cart-btn { border-color:var(--accent-orange); color:var(--accent-orange); }
+        .product-card.theme-green  .product-cart-btn { border-color:var(--accent-green); color:var(--accent-green); }
+        .product-card.theme-yellow .product-cart-btn { border-color:var(--accent-yellow); color:#b08000; }
+        .product-card.theme-purple .product-cart-btn { border-color:var(--accent-purple); color:var(--accent-purple); }
+
+        .product-cart-btn:hover { opacity:0.75; }
+
+        /* Buy = solid */
+        .product-card.theme-blue   .product-buy-btn { background:var(--accent-blue); color:#000; }
+        .product-card.theme-pink   .product-buy-btn { background:var(--accent-pink); color:#fff; }
+        .product-card.theme-orange .product-buy-btn { background:var(--accent-orange); color:#fff; }
+        .product-card.theme-green  .product-buy-btn { background:var(--accent-green); color:#000; }
+        .product-card.theme-yellow .product-buy-btn { background:var(--accent-yellow); color:#000; }
+        .product-card.theme-purple .product-buy-btn { background:var(--accent-purple); color:#fff; }
+
+        .product-buy-btn:hover { opacity:0.85; transform:scale(0.97); }
+
+        .row-divider {
+            grid-column:1/-1; display:flex; align-items:center; gap:10px; padding:10px 0 4px;
+        }
+        .row-divider span { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--text-muted); white-space:nowrap; }
+        .row-divider::before, .row-divider::after { content:''; flex:1; height:1px; background:var(--divider); }
+
+        /* ===================== ABOUT SECTION ===================== */
+        .about-section {
+            background: var(--about-bg);
+            padding: 70px 5%;
+            border-top: 1px solid var(--border);
+            transition: background 0.5s;
+        }
+
+        .about-top-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(217,70,239,0.1);
+            border: 1px solid rgba(217,70,239,0.2);
+            border-radius: 20px;
+            padding: 5px 14px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent-pink);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .about-headline {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 14px;
+            line-height: 1.15;
+        }
+        .about-headline span {
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-subtitle { color:var(--text-muted); font-size:1.05rem; max-width:600px; margin-bottom:50px; }
+
+        /* Stats row */
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .about-stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 22px 20px;
+            text-align: center;
+            transition: transform 0.25s, box-shadow 0.25s;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+        .about-stat-card:hover { transform:translateY(-5px); box-shadow:0 10px 30px var(--shadow); }
+        .about-stat-card .stat-icon { font-size:2rem; margin-bottom:8px; }
+        .about-stat-card .stat-val { font-size:2rem; font-weight:900; color:var(--text); line-height:1; }
+        .about-stat-card .stat-val span { font-size:1.1rem; }
+        .about-stat-card .stat-desc { font-size:12px; color:var(--text-muted); margin-top:5px; }
+
+        /* About grid */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .about-info-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .about-info-card h3 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
-            gap: 6px;
-            margin-top: 2px;
-            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .about-info-card h3 .ic {
+            width: 32px; height: 32px;
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; flex-shrink: 0;
+        }
+        .ic-blue   { background:rgba(0,210,255,0.12); }
+        .ic-pink   { background:rgba(217,70,239,0.12); }
+        .ic-orange { background:rgba(255,107,53,0.12); }
+        .ic-green  { background:rgba(0,230,118,0.12); }
+
+        .about-info-card p { font-size:13.5px; color:var(--text-muted); line-height:1.7; }
+
+        .about-features { list-style:none; display:flex; flex-direction:column; gap:10px; }
+        .about-features li {
+            display: flex; align-items: flex-start; gap: 10px;
+            font-size: 13px; color: var(--text-muted);
+        }
+        .about-features li::before {
+            content: '✓';
+            flex-shrink: 0;
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            background: rgba(0,210,255,0.12);
+            color: var(--accent-blue);
+            font-size: 11px; font-weight: 800;
+            display: flex; align-items: center; justify-content: center;
         }
 
-        .price-current {
-            font-size: 14px;
-            font-weight: 800;
-            color: #fff;
-        }
-
-        .product-card.theme-blue .price-current { color: var(--accent-blue); }
-        .product-card.theme-pink .price-current { color: var(--accent-pink); }
-        .product-card.theme-orange .price-current { color: var(--accent-orange); }
-        .product-card.theme-green .price-current { color: #69f0ae; }
-        .product-card.theme-yellow .price-current { color: #ffd740; }
-        .product-card.theme-purple .price-current { color: #b388ff; }
-
-        .price-original {
-            font-size: 10px;
+        /* Payment methods */
+        .payment-chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+        .payment-chip {
+            background: var(--card-top);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 700;
             color: var(--text-muted);
-            text-decoration: line-through;
         }
 
-        .product-stars {
-            font-size: 10px;
-            color: #ffd740;
-            letter-spacing: 1px;
+        /* ===================== CONTACT ===================== */
+        .about-contact-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 36px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            box-shadow: 0 4px 20px var(--shadow);
         }
 
-        /* Add to cart button */
-        .product-cart-btn {
-            margin-top: 6px;
-            width: 100%;
-            padding: 7px 0;
-            border: none;
-            border-radius: 6px;
-            font-size: 10px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            color: #000;
-        }
+        .contact-info h3 { font-size:1.3rem; font-weight:800; color:var(--text); margin-bottom:8px; }
+        .contact-info p { font-size:13.5px; color:var(--text-muted); margin-bottom:22px; line-height:1.65; }
 
-        .product-card.theme-blue .product-cart-btn { background: var(--accent-blue); }
-        .product-card.theme-pink .product-cart-btn { background: var(--accent-pink); color: #fff; }
-        .product-card.theme-orange .product-cart-btn { background: var(--accent-orange); color: #fff; }
-        .product-card.theme-green .product-cart-btn { background: #00e676; }
-        .product-card.theme-yellow .product-cart-btn { background: #ffd740; }
-        .product-card.theme-purple .product-cart-btn { background: #7c4dff; color: #fff; }
-
-        .product-cart-btn:hover { opacity: 0.85; transform: scale(0.98); }
-
-        /* Row label divider */
-        .row-divider {
-            grid-column: 1 / -1;
+        .contact-detail-list { display:flex; flex-direction:column; gap:12px; }
+        .contact-detail-item {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 8px 0 4px;
-        }
-
-        .row-divider span {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 13px;
             color: var(--text-muted);
-            white-space: nowrap;
+        }
+        .contact-detail-item .cd-icon {
+            width: 36px; height: 36px;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; flex-shrink: 0;
+            background: var(--card-top);
+            border: 1px solid var(--border);
+        }
+        .contact-detail-item strong { display:block; font-size:11px; text-transform:uppercase; letter-spacing:0.8px; color:var(--text); margin-bottom:1px; }
+
+        .contact-buttons-section h3 { font-size:1.1rem; font-weight:800; color:var(--text); margin-bottom:16px; }
+
+        .contact-btn-grid { display:flex; flex-direction:column; gap:10px; }
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 18px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            color: #fff;
+            transition: transform 0.2s, filter 0.2s, box-shadow 0.2s;
+        }
+        .contact-btn:hover { transform:translateY(-2px); filter:brightness(1.08); box-shadow:0 6px 20px rgba(0,0,0,0.3); }
+        .contact-btn .cb-icon { font-size:20px; }
+        .contact-btn .cb-text { display:flex; flex-direction:column; }
+        .contact-btn .cb-text small { font-size:10px; font-weight:500; opacity:0.8; text-transform:uppercase; letter-spacing:0.5px; }
+        .contact-btn .cb-text strong { font-size:13px; }
+        .contact-btn .cb-arrow { margin-left:auto; opacity:0.6; }
+
+        .contact-btn.whatsapp  { background:linear-gradient(135deg,#25D366,#128C7E); }
+        .contact-btn.messenger { background:linear-gradient(135deg,#0084FF,#0052cc); }
+        .contact-btn.phone     { background:linear-gradient(135deg,#555,#333); }
+        .contact-btn.email     { background:linear-gradient(135deg,#ff6b35,#d946ef); }
+
+        /* ===================== FOOTER ===================== */
+        footer {
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+            padding: 28px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+        footer .logo { font-size:18px; }
+        footer p { font-size:12px; color:var(--text-muted); }
+
+        /* ===================== RESPONSIVE ===================== */
+        @media (max-width: 900px) {
+            .about-grid { grid-template-columns:1fr; }
+            .about-contact-section { grid-template-columns:1fr; }
+            .nav-links { display:none; }
         }
 
-        .row-divider::before, .row-divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: rgba(255,255,255,0.06);
+        @media (max-width: 640px) {
+            .hero {
+                flex-direction: column;
+                padding: 30px 4% 40px;
+                gap: 28px;
+                text-align: center;
+            }
+            .hero-content { min-width:unset; }
+            .hero p { margin-left:auto; margin-right:auto; }
+            .hero-cta { justify-content:center; }
+            .hero-stats { justify-content:center; gap:18px; }
+            .hero-showcase { min-width:unset; width:100%; max-width:100%; }
+            .hero-badge { margin:0 auto 14px; }
+            .about-stats { grid-template-columns:repeat(2,1fr); }
+            .products-section { padding:36px 3%; }
+            .product-name { font-size:10.5px; }
+            .price-current { font-size:12px; }
+            .product-cart-btn, .product-buy-btn { font-size:8px; padding:5px 1px; }
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero { flex-direction: column; padding: 30px 5% 50px; }
-            .hero h1 { font-size: 2.5rem; }
-            .hero-showcase { min-width: unset; width: 100%; }
-            .nav-links { display: none; }
-            .products-section { padding: 40px 3%; }
-            .product-grid { gap: 8px; }
-        }
-
-        @media (max-width: 480px) {
-            .product-name { font-size: 11px; }
-            .price-current { font-size: 13px; }
+        @media (max-width: 380px) {
+            .about-stats { grid-template-columns:1fr 1fr; }
+            .hero h1 { font-size:1.8rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="logo">NEX<span>GEN</span></div>
-        <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">Products</a>
-            <a href="#">Blockchain</a>
-            <a href="#">About</a>
+<!-- Color burst overlay -->
+<div id="color-burst"></div>
+
+<!-- ===================== NAV ===================== -->
+<nav>
+    <div class="logo">NEX<span>GEN</span></div>
+    <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Products</a>
+        <a href="#">Blockchain</a>
+        <a href="#about-sec">About</a>
+        <a href="#about-sec">Contact</a>
+    </div>
+    <div class="nav-actions">
+        <!-- Dark/Light toggle -->
+        <div class="theme-toggle" title="Toggle Dark/Light Mode">
+            <label class="toggle-track" onclick="toggleTheme()">
+                <span class="t-icon">🌙</span>
+                <span class="t-icon">☀️</span>
+                <div class="toggle-thumb"></div>
+            </label>
         </div>
-        <div class="nav-actions">
-            <button class="btn-primary">Connect</button>
-            <div class="menu-container">
-                <div class="menu-dots" onclick="this.classList.toggle('active'); document.getElementById('dropMenu').classList.toggle('show')">
-                    <span></span><span></span><span></span>
-                </div>
-                <div class="dropdown-menu" id="dropMenu">
-                    <h4>Quick Links</h4>
-                    <a href="#">🛒 Cart</a>
-                    <a href="#">❤️ Wishlist</a>
-                    <a href="#">📦 Orders</a>
-                    <a href="#">⚙️ Settings</a>
+        <button class="btn-primary">Connect</button>
+        <div class="menu-container">
+            <div class="menu-dots" onclick="this.classList.toggle('active'); document.getElementById('dropMenu').classList.toggle('show')">
+                <span></span><span></span><span></span>
+            </div>
+            <div class="dropdown-menu" id="dropMenu">
+                <h4>Quick Links</h4>
+                <a href="#">🛒 Cart</a>
+                <a href="#">❤️ Wishlist</a>
+                <a href="#">📦 Orders</a>
+                <a href="#about-sec">📞 Contact</a>
+                <a href="#">⚙️ Settings</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Search Banner -->
+<div class="search-banner">
+    <div class="search-container">
+        <div class="search-form">
+            <input class="search-input" type="text" placeholder="Search products, brands, categories...">
+            <svg class="search-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+    </div>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-badge"><span class="pulse"></span> New Season Drop</div>
+        <h1>Next-Gen Tech<br>at Your <span class="grad">Fingertips</span></h1>
+        <p>Explore the latest in hardware, blockchain gadgets, and cutting-edge accessories — curated for enthusiasts.</p>
+        <div class="hero-cta">
+            <button class="btn-hero-main">Shop Now →</button>
+            <button class="btn-hero-outline">View Deals</button>
+        </div>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="stat-num">12K<span>+</span></div>
+                <div class="stat-label">Products</div>
+            </div>
+            <div class="hero-stat">
+                <div class="stat-num">98<span>%</span></div>
+                <div class="stat-label">Satisfaction</div>
+            </div>
+            <div class="hero-stat">
+                <div class="stat-num">24<span>/7</span></div>
+                <div class="stat-label">Support</div>
+            </div>
+        </div>
+    </div>
+    <div class="hero-showcase">
+        <div class="terminal-box">
+            <div class="hero-featured-label">
+                <span>Featured Products</span>
+                <span class="live-dot">LIVE</span>
+            </div>
+            <div class="slider-container">
+                <img class="slider-image active" src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=500&q=80" alt="Laptop">
+                <img class="slider-image" src="https://images.unsplash.com/photo-1546054454-aa26e2b734c7?w=500&q=80" alt="Phone">
+                <img class="slider-image" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80" alt="Headphones">
+            </div>
+            <div class="slider-dots">
+                <div class="slider-dot active"></div>
+                <div class="slider-dot"></div>
+                <div class="slider-dot"></div>
+            </div>
+            <div class="hero-chips">
+                <span class="hero-chip active">Laptops</span>
+                <span class="hero-chip">Phones</span>
+                <span class="hero-chip">Audio</span>
+                <span class="hero-chip">Gaming</span>
+                <span class="hero-chip">Crypto</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== PRODUCTS ===================== -->
+<section class="products-section">
+    <div class="section-header">
+        <h2><span class="dot"></span> OUR PRUDUCT</h2>
+        <a href="#" class="view-all">Shop More →</a>
+    </div>
+    <div class="product-grid">
+
+        <div class="product-card theme-blue">
+            <div class="product-img-wrap">
+                <span class="discount-badge">-42%</span>
+                <img src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=300&q=80" alt="Keyboard">
+                <span class="stock-badge">3 left</span>
+            </div>
+            <div class="product-info">
+                <div class="product-name">RGB Mechanical Gaming Keyboard TKL</div>
+                <div class="product-stars">★★★★★</div>
+                <div class="product-price-row"><span class="price-current">৳2,450</span><span class="price-original">৳4,200</span></div>
+                <div class="product-actions">
+                    <button class="product-cart-btn">🛒 Cart</button>
+                    <button class="product-buy-btn">Buy</button>
                 </div>
             </div>
         </div>
-    </nav>
 
-    <!-- Search Banner -->
-    <div class="search-banner">
-        <div class="search-container">
-            <div class="search-form">
-                <input class="search-input" type="text" placeholder="Search products, brands...">
-                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <div class="product-card theme-pink">
+            <div class="product-img-wrap">
+                <span class="discount-badge">-55%</span>
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&q=80" alt="Headphones">
+            </div>
+            <div class="product-info">
+                <div class="product-name">Wireless Noise Cancelling Headphones</div>
+                <div class="product-stars">★★★★☆</div>
+                <div class="product-price-row"><span class="price-current">৳1,890</span><span class="price-original">৳4,200</span></div>
+                <div class="product-actions">
+                    <button class="product-cart-btn">🛒 Cart</button>
+                    <button class="product-buy-btn">Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card theme-orange">
+            <div class="product-img-wrap">
+                <span class="discount-badge">-30%</span>
+                <img src="https://images.unsplash.com/photo-1546054454-aa26e2b734c7?w=300&q=80" alt="Smartphone">
+                <span class="stock-badge">Last 1!</span>
+            </div>
+            <div class="product-info">
+                <div class="product-name">Android 5G Flagship Smartphone 256GB</div>
+                <div class="product-stars">★★★★★</div>
+                <div class="product-price-row"><span class="price-current">৳18,500</span><span class="price-original">৳26,400</span></div>
+                <div class="product-actions">
+                    <button class="product-cart-btn">🛒 Cart</button>
+                    <button class="product-buy-btn">Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card theme-green">
+            <div class="product-img-wrap">
+                <span class="discount-badge">-67%</span>
+                <img src="https://images.unsplash.com/photo-1593642634367-d91a135587b5?w=300&q=80" alt="SSD">
+            </div>
+            <div class="product-info">
+                <div class="product-name">1TB NVMe M.2 SSD PCIe Gen4</div>
+                <div class="product-stars">★★★★★</div>
+                <div class="product-price-row"><span class="price-current">৳3,200</span><span class="price-original">৳9,700</span></div>
+                <div class="product-actions">
+                    <button class="product-cart-btn">🛒 Cart</button>
+                    <button class="product-buy-btn">Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card theme-yellow">
+            <div class="product-img-wrap">
+                <span class="discount-badge">-48%</span>
+                <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=300&q=80" alt="Smart Watch">
+            </div>
+            <div class="product-info">
+                <div class="product-name">Smart Watch AMOLED Health Monitor</div>
+                <div class="product-stars">★★★★☆</div>
+                <div class="product-price-row"><span class="price-current">৳2,750</span><span class="price-original">৳5,280</span></div>
+                <div class="product-actions">
+                    <button class="product-cart-btn">🛒 Cart</button>
+                    <button class="product-buy-btn">Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card theme-purple">
+            <div class="product-img-wrap">
+                <span class="discount-badge">-17%</span>
+                <img src="https://images.unsplash.com/photo-1625842268584-8f3296236761?w=300&q=80" alt="Charger">
+            </div>
+            <div class="product-info">
+                <div class="product-name">Portable 65W USB-C GaN Charger</div>
+                <div class="product-stars">★★★★★</div>
+                <div class="product-price-row"><span class="price-current">৳1,190</span><span class="price-original">৳1,430</span></div>
+                <div class="product-actions">
+                    <button class="product-cart-btn">🛒 Cart</button>
+                    <button class="product-buy-btn">Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card theme-blue">
+            <div class="product-img-wrap">
+                <span class="discount-badge">-22%</span>
+                <img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=300&q=80" alt="Gaming Mouse">
+                <span class="stock-badge">5 left</span>
+            </div>
+            <div class="product-info">
+                <div class="product-name">Pro Gaming Mouse 26K DPI Wireless</div>
+                <div class="product-stars">★★★★★</div>
+                <div class="product-price-row"><span class="price-current">৳4,100</span><span class="price-original">৳5,260</span></div>
+                <div class="product-actions">
+                    <button class="product-cart-btn">🛒 Cart</button>
+                    <button class="product-buy-btn">Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card theme-pink">
+            <div class="product-img-wrap">
+                <span class="discount-badge">-35%</span>
+                <img src="https://images.unsplash.com/photo-1551816230-ef5deaed4a26?w=300&q=80" alt="Earbuds">
+            </div>
+            <div class="product-info">
+                <div class="product-name">TWS Earbuds ANC 40hr Battery Life</div>
+                <div class="product-stars">★★★★☆</div>
+                <div class="product-price-row"><span class="price-current">৳1,350</span><span class="price-original">৳2,080</span></div>
+                <div class="product-actions">
+                    <button class="product-cart-btn">🛒 Cart</button>
+                    <button class="product-buy-btn">Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card theme-orange">
+            <div class="product-img-wrap">
+                <span class="discount-badge">-60%</span>
+                <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?w=300&q=80" alt="USB Hub">
+                <span class="stock-badge">2 left</span>
+            </div>
+            <div class="product-info">
+                <div class="product-name">10-in-1 USB-C Hub 4K HDMI Dock</div>
+                <div class="product-stars">★★★★★</div>
+                <div class="product-price-row"><span class="price-current">৳880</span><span class="price-original">৳2,200</span></div>
+                <div class="product-actions">
+                    <button class="product-cart-btn">🛒 Cart</button>
+                    <button class="product-buy-btn">Buy</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ===================== ABOUT SECTION ===================== -->
+<section class="about-section" id="about-sec">
+
+    <div class="about-top-badge">✦ About NexGen</div>
+    <h2 class="about-headline">Built for Tech Lovers,<br>Powered by <span>Passion</span></h2>
+    <p class="about-subtitle">NexGen is Bangladesh's premier destination for cutting-edge tech, gaming gear, blockchain hardware, and smart accessories — delivered fast, priced right.</p>
+
+    <!-- Stats -->
+    <div class="about-stats">
+        <div class="about-stat-card">
+            <div class="stat-icon">🛍️</div>
+            <div class="stat-val">12K<span>+</span></div>
+            <div class="stat-desc">Products Listed</div>
+        </div>
+        <div class="about-stat-card">
+            <div class="stat-icon">😊</div>
+            <div class="stat-val">50K<span>+</span></div>
+            <div class="stat-desc">Happy Customers</div>
+        </div>
+        <div class="about-stat-card">
+            <div class="stat-icon">🚀</div>
+            <div class="stat-val">4.9<span>★</span></div>
+            <div class="stat-desc">Average Rating</div>
+        </div>
+        <div class="about-stat-card">
+            <div class="stat-icon">📦</div>
+            <div class="stat-val">24H</div>
+            <div class="stat-desc">Fast Delivery</div>
+        </div>
+        <div class="about-stat-card">
+            <div class="stat-icon">🔒</div>
+            <div class="stat-val">100<span>%</span></div>
+            <div class="stat-desc">Secure Payments</div>
+        </div>
+        <div class="about-stat-card">
+            <div class="stat-icon">🌍</div>
+            <div class="stat-val">64<span>+</span></div>
+            <div class="stat-desc">Districts Covered</div>
+        </div>
+    </div>
+
+    <!-- Info Grid -->
+    <div class="about-grid">
+        <div class="about-info-card">
+            <h3><span class="ic ic-blue">🏢</span> Who We Are</h3>
+            <p>Founded in 2020, NexGen started as a small tech reseller in Dhaka and has grown into a full-scale e-commerce platform trusted by thousands of customers across Bangladesh. We specialize in genuine, warrantied products from top global brands including Apple, Samsung, Logitech, ASUS, and more.</p>
+        </div>
+        <div class="about-info-card">
+            <h3><span class="ic ic-pink">🎯</span> Our Mission</h3>
+            <p>We believe everyone deserves access to quality technology at fair prices. Our mission is to bridge the gap between cutting-edge global tech and everyday Bangladeshi consumers — with transparent pricing, honest reviews, and dependable after-sales service you can actually count on.</p>
+        </div>
+        <div class="about-info-card">
+            <h3><span class="ic ic-orange">⚡</span> Why Choose Us</h3>
+            <ul class="about-features">
+                <li>100% genuine products with official warranty</li>
+                <li>Same-day delivery in Dhaka, 24–48hr nationwide</li>
+                <li>14-day hassle-free return policy</li>
+                <li>Dedicated customer support 7 days a week</li>
+                <li>Verified seller with 50,000+ satisfied orders</li>
+                <li>Competitive pricing updated daily</li>
+            </ul>
+        </div>
+        <div class="about-info-card">
+            <h3><span class="ic ic-green">💳</span> Payment Methods</h3>
+            <p>We accept all major payment methods for your convenience. Pay on delivery available for all Dhaka orders.</p>
+            <div class="payment-chips">
+                <span class="payment-chip">💳 Card</span>
+                <span class="payment-chip">📱 bKash</span>
+                <span class="payment-chip">📱 Nagad</span>
+                <span class="payment-chip">🏦 Bank Transfer</span>
+                <span class="payment-chip">💵 Cash on Delivery</span>
+                <span class="payment-chip">🔗 Rocket</span>
             </div>
         </div>
     </div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Next-Gen Tech<br>at Your <span>Fingertips</span></h1>
-            <p>Explore the latest in hardware, blockchain gadgets, and cutting-edge accessories — delivered fast.</p>
-            <button class="btn-primary">Shop Now →</button>
-            <div class="about-contact">
-                <h3>Contact Us</h3>
-                <div class="contact-buttons">
-                    <a href="#" class="contact-btn whatsapp">💬 WhatsApp</a>
-                    <a href="#" class="contact-btn messenger">💙 Messenger</a>
-                    <a href="#" class="contact-btn phone">📞 Call</a>
+    <!-- Contact -->
+    <div class="about-contact-section">
+        <div class="contact-info">
+            <h3>Get In Touch</h3>
+            <p>Our friendly support team is ready to help you with orders, returns, product queries, or anything else. Reach out through any channel below — we reply fast.</p>
+            <div class="contact-detail-list">
+                <div class="contact-detail-item">
+                    <span class="cd-icon">📍</span>
+                    <div><strong>Address</strong>Level 4, Tech Tower, Panthapath, Dhaka-1205</div>
+                </div>
+                <div class="contact-detail-item">
+                    <span class="cd-icon">🕐</span>
+                    <div><strong>Hours</strong>Saturday–Thursday, 9:00 AM – 9:00 PM</div>
+                </div>
+                <div class="contact-detail-item">
+                    <span class="cd-icon">📧</span>
+                    <div><strong>Email</strong>support@nexgen.com.bd</div>
+                </div>
+                <div class="contact-detail-item">
+                    <span class="cd-icon">📞</span>
+                    <div><strong>Hotline</strong>01700-000000 (Call & SMS)</div>
                 </div>
             </div>
         </div>
-        <div class="hero-showcase">
-            <div class="terminal-box">
-                <div class="slider-container">
-                    <img class="slider-image active" src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=500&q=80" alt="Laptop">
-                    <img class="slider-image" src="https://images.unsplash.com/photo-1546054454-aa26e2b734c7?w=500&q=80" alt="Phone">
-                    <img class="slider-image" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80" alt="Headphones">
-                </div>
-                <div class="slider-dots">
-                    <div class="slider-dot active"></div>
-                    <div class="slider-dot"></div>
-                    <div class="slider-dot"></div>
-                </div>
+        <div class="contact-buttons-section">
+            <h3>Message Us Directly</h3>
+            <div class="contact-btn-grid">
+                <a href="#" class="contact-btn whatsapp">
+                    <span class="cb-icon">💬</span>
+                    <span class="cb-text"><small>Chat on</small><strong>WhatsApp</strong></span>
+                    <span class="cb-arrow">›</span>
+                </a>
+                <a href="#" class="contact-btn messenger">
+                    <span class="cb-icon">💙</span>
+                    <span class="cb-text"><small>Message on</small><strong>Messenger</strong></span>
+                    <span class="cb-arrow">›</span>
+                </a>
+                <a href="#" class="contact-btn phone">
+                    <span class="cb-icon">📞</span>
+                    <span class="cb-text"><small>Give us a</small><strong>Phone Call</strong></span>
+                    <span class="cb-arrow">›</span>
+                </a>
+                <a href="#" class="contact-btn email">
+                    <span class="cb-icon">✉️</span>
+                    <span class="cb-text"><small>Write to us</small><strong>Email Support</strong></span>
+                    <span class="cb-arrow">›</span>
+                </a>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- ============ PRODUCT SECTION — 3 per row ============ -->
-    <section class="products-section">
+<!-- ===================== FOOTER ===================== -->
+<footer>
+    <div class="logo">NEX<span>GEN</span></div>
+    <p>© 2026 TasinSaimon</p>
+    <p style="font-size:12px; color:var(--text-muted)">Made with ❤️ for tech lovers</p>
+</footer>
 
-        <!-- Flash Sale Row -->
-        <div class="section-header">
-            <h2><span class="dot"></span> Flash Sale 🔥</h2>
-            <a href="#" class="view-all">Shop More →</a>
-        </div>
+<script>
+    /* ============ SLIDER ============ */
+    const sliderImgs = document.querySelectorAll('.slider-image');
+    const sliderDots = document.querySelectorAll('.slider-dot');
+    let current = 0;
 
-        <div class="product-grid">
-            <!-- Product 1 -->
-            <div class="product-card theme-blue">
-                <div class="product-img-wrap">
-                    <span class="discount-badge">-42%</span>
-                    <img src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=300&q=80" alt="Mechanical Keyboard">
-                    <span class="stock-badge">3 left</span>
-                </div>
-                <div class="product-info">
-                    <div class="product-name">RGB Mechanical Gaming Keyboard TKL</div>
-                    <div class="product-stars">★★★★★</div>
-                    <div class="product-price-row">
-                        <span class="price-current">৳2,450</span>
-                        <span class="price-original">৳4,200</span>
-                    </div>
-                    <button class="product-cart-btn">Add to Cart</button>
-                </div>
-            </div>
+    function goTo(i) {
+        sliderImgs[current].classList.remove('active');
+        sliderDots[current].classList.remove('active');
+        current = i;
+        sliderImgs[current].classList.add('active');
+        sliderDots[current].classList.add('active');
+    }
+    sliderDots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+    setInterval(() => goTo((current + 1) % sliderImgs.length), 3500);
 
-            <!-- Product 2 -->
-            <div class="product-card theme-pink">
-                <div class="product-img-wrap">
-                    <span class="discount-badge">-55%</span>
-                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&q=80" alt="Headphones">
-                </div>
-                <div class="product-info">
-                    <div class="product-name">Wireless Noise Cancelling Headphones</div>
-                    <div class="product-stars">★★★★☆</div>
-                    <div class="product-price-row">
-                        <span class="price-current">৳1,890</span>
-                        <span class="price-original">৳4,200</span>
-                    </div>
-                    <button class="product-cart-btn">Add to Cart</button>
-                </div>
-            </div>
-
-            <!-- Product 3 -->
-            <div class="product-card theme-orange">
-                <div class="product-img-wrap">
-                    <span class="discount-badge">-30%</span>
-                    <img src="https://images.unsplash.com/photo-1546054454-aa26e2b734c7?w=300&q=80" alt="Smartphone">
-                    <span class="stock-badge">Last 1!</span>
-                </div>
-                <div class="product-info">
-                    <div class="product-name">Android 5G Flagship Smartphone 256GB</div>
-                    <div class="product-stars">★★★★★</div>
-                    <div class="product-price-row">
-                        <span class="price-current">৳18,500</span>
-                        <span class="price-original">৳26,400</span>
-                    </div>
-                    <button class="product-cart-btn">Add to Cart</button>
-                </div>
-            </div>
-
-            <!-- Row Divider -->
-            <div class="row-divider"><span>Daily Deals</span></div>
-
-            <!-- Product 4 -->
-            <div class="product-card theme-green">
-                <div class="product-img-wrap">
-                    <span class="discount-badge">-67%</span>
-                    <img src="https://images.unsplash.com/photo-1593642634367-d91a135587b5?w=300&q=80" alt="SSD">
-                </div>
-                <div class="product-info">
-                    <div class="product-name">1TB NVMe M.2 SSD PCIe Gen4</div>
-                    <div class="product-stars">★★★★★</div>
-                    <div class="product-price-row">
-                        <span class="price-current">৳3,200</span>
-                        <span class="price-original">৳9,700</span>
-                    </div>
-                    <button class="product-cart-btn">Add to Cart</button>
-                </div>
-            </div>
-
-            <!-- Product 5 -->
-            <div class="product-card theme-yellow">
-                <div class="product-img-wrap">
-                    <span class="discount-badge">-48%</span>
-                    <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=300&q=80" alt="Smart Watch">
-                </div>
-                <div class="product-info">
-                    <div class="product-name">Smart Watch AMOLED Health Monitor</div>
-                    <div class="product-stars">★★★★☆</div>
-                    <div class="product-price-row">
-                        <span class="price-current">৳2,750</span>
-                        <span class="price-original">৳5,280</span>
-                    </div>
-                    <button class="product-cart-btn">Add to Cart</button>
-                </div>
-            </div>
-
-            <!-- Product 6 -->
-            <div class="product-card theme-purple">
-                <div class="product-img-wrap">
-                    <span class="discount-badge">-17%</span>
-                    <img src="https://images.unsplash.com/photo-1625842268584-8f3296236761?w=300&q=80" alt="GPU">
-                </div>
-                <div class="product-info">
-                    <div class="product-name">Portable 65W USB-C GaN Charger</div>
-                    <div class="product-stars">★★★★★</div>
-                    <div class="product-price-row">
-                        <span class="price-current">৳1,190</span>
-                        <span class="price-original">৳1,430</span>
-                    </div>
-                    <button class="product-cart-btn">Add to Cart</button>
-                </div>
-            </div>
-
-            <!-- Row Divider -->
-            <div class="row-divider"><span>New Arrivals</span></div>
-
-            <!-- Product 7 -->
-            <div class="product-card theme-blue">
-                <div class="product-img-wrap">
-                    <span class="discount-badge">-22%</span>
-                    <img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=300&q=80" alt="Gaming Mouse">
-                    <span class="stock-badge">5 left</span>
-                </div>
-                <div class="product-info">
-                    <div class="product-name">Pro Gaming Mouse 26K DPI Wireless</div>
-                    <div class="product-stars">★★★★★</div>
-                    <div class="product-price-row">
-                        <span class="price-current">৳4,100</span>
-                        <span class="price-original">৳5,260</span>
-                    </div>
-                    <button class="product-cart-btn">Add to Cart</button>
-                </div>
-            </div>
-
-            <!-- Product 8 -->
-            <div class="product-card theme-pink">
-                <div class="product-img-wrap">
-                    <span class="discount-badge">-35%</span>
-                    <img src="https://images.unsplash.com/photo-1551816230-ef5deaed4a26?w=300&q=80" alt="Earbuds">
-                </div>
-                <div class="product-info">
-                    <div class="product-name">TWS Earbuds ANC 40hr Battery Life</div>
-                    <div class="product-stars">★★★★☆</div>
-                    <div class="product-price-row">
-                        <span class="price-current">৳1,350</span>
-                        <span class="price-original">৳2,080</span>
-                    </div>
-                    <button class="product-cart-btn">Add to Cart</button>
-                </div>
-            </div>
-
-            <!-- Product 9 -->
-            <div class="product-card theme-orange">
-                <div class="product-img-wrap">
-                    <span class="discount-badge">-60%</span>
-                    <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?w=300&q=80" alt="USB Hub">
-                    <span class="stock-badge">2 left</span>
-                </div>
-                <div class="product-info">
-                    <div class="product-name">10-in-1 USB-C Hub 4K HDMI Dock</div>
-                    <div class="product-stars">★★★★★</div>
-                    <div class="product-price-row">
-                        <span class="price-current">৳880</span>
-                        <span class="price-original">৳2,200</span>
-                    </div>
-                    <button class="product-cart-btn">Add to Cart</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <script>
-        // Slider Logic
-        const images = document.querySelectorAll('.slider-image');
-        const dots = document.querySelectorAll('.slider-dot');
-        let current = 0;
-
-        function goTo(index) {
-            images[current].classList.remove('active');
-            dots[current].classList.remove('active');
-            current = index;
-            images[current].classList.add('active');
-            dots[current].classList.add('active');
-        }
-
-        dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
-        setInterval(() => goTo((current + 1) % images.length), 3500);
-
-        // Close dropdown on outside click
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.menu-container')) {
-                document.getElementById('dropMenu').classList.remove('show');
-                document.querySelector('.menu-dots').classList.remove('active');
-            }
+    /* ============ HERO CHIPS ============ */
+    document.querySelectorAll('.hero-chip').forEach(chip => {
+        chip.addEventListener('click', function() {
+            document.querySelectorAll('.hero-chip').forEach(c => c.classList.remove('active'));
+            this.classList.add('active');
         });
-    </script>
+    });
+
+    /* ============ DROPDOWN ============ */
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.menu-container')) {
+            document.getElementById('dropMenu').classList.remove('show');
+            document.querySelector('.menu-dots').classList.remove('active');
+        }
+    });
+
+    /* ============ THEME TOGGLE WITH COLOR BURST ============ */
+    function toggleTheme() {
+        const html = document.documentElement;
+        const burst = document.getElementById('color-burst');
+        const isDark = html.getAttribute('data-theme') === 'dark';
+
+        // Trigger burst animation
+        burst.classList.remove('playing');
+        void burst.offsetWidth; // reflow
+        burst.classList.add('playing');
+
+        // Switch theme halfway through animation
+        setTimeout(() => {
+            html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+        }, 600);
+
+        // Remove playing class after animation ends
+        setTimeout(() => {
+            burst.classList.remove('playing');
+        }, 1300);
+    }
+</script>
 </body>
 </html>
