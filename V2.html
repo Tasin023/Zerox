@@ -24,6 +24,11 @@
             box-sizing: border-box;
             font-family: var(--font-main);
         }
+        .about-section {
+            padding: 100px 8%;
+            background: #090b11;
+            border-top: 1px solid rgba(255,255,255,0.02);
+        }        
 
         .about-contact {
             margin-top: 30px;
@@ -42,6 +47,11 @@
             gap: 12px;
             flex-wrap: wrap;
         }
+                    .about-stats {
+                width: 100%;
+                grid-template-columns: 1fr 1fr; /* Retains clean 2x2 grid format on phone cards */
+                gap: 12px;
+            }
 
         .next-level-price {
             position: relative;
@@ -59,6 +69,18 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0px rgba(255, 255, 255, 0.1);
             animation: gentle-float 4s ease-in-out infinite;
         }
+        .about-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .about-text { flex: 1.2; min-width: 320px; }
+        .about-text h2 { font-size: 2.5rem; margin-bottom: 20px; font-weight: 800; }
+        .about-text h2 span { color: var(--accent-pink); }
+        .about-text p { color: var(--text-muted); margin-bottom: 20px; font-size: 1.1rem; }        
 
         .next-level-price .currency {
             font-size: 1.1rem;
@@ -86,7 +108,13 @@
             color: var(--text-muted);
             margin-left: 1px;
         }
-
+        .about-stat-box {
+            background: var(--card-top-bg);
+            padding: 30px 20px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.02);
+        }
         .next-level-price::after {
             content: '';
             position: absolute;
@@ -736,14 +764,6 @@
             <h1>Next-Gen Tech<br>at Your <span>Fingertips</span></h1>
             <p>Explore the latest in hardware, blockchain gadgets, and cutting-edge accessories — delivered fast.</p>
             <button class="btn-primary">Shop Now →</button>
-            <div class="about-contact">
-                <h3>Contact Us</h3>
-                <div class="contact-buttons">
-                    <a href="#" class="contact-btn whatsapp">💬 WhatsApp</a>
-                    <a href="#" class="contact-btn messenger">💙 Messenger</a>
-                    <a href="#" class="contact-btn phone">📞 Call</a>
-                </div>
-            </div>
         </div>
         <div class="hero-showcase">
             <div class="terminal-box">
